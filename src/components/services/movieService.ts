@@ -2,12 +2,22 @@ import axios from "axios";
 import type Movie from "../../types/movie";
 
 interface MoviesHttpResponse {
-  hits: Movie[];
+  results: Movie[];
 }
+const myKey = import.meta.env.VITE_TMDB_TOKEN;
 
 export const fetchMovies = async (query: string): Promise<Movie[]> => {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${myKey}`,
+    },
+  };
   const response = await axios.get<MoviesHttpResponse>(
-    `https://hn.algolia.com/a_pi/v1/search?query=${query}`
+    `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=true&language=en-US&page=1`,
+    options
   );
-  return response.data.hits;
+
+  return response.data.results;
 };

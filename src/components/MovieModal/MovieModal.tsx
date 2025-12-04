@@ -1,6 +1,13 @@
+import type Movie from "../../types/movie";
 import css from "./MovieModal.module.css";
 
-function MovieModal() {
+interface MovieModalProps {
+  items: Movie[];
+}
+
+function MovieModal({ items }: MovieModalProps) {
+  console.log(items);
+
   return (
     <div className={css.backdrop} role="dialog" aria-modal="true">
       <div className={css.modal}>

@@ -11,6 +11,11 @@ function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+
+  const handleModal = () => {
+    setIsModal(true);
+  };
 
   const handleSearch = async (query: string) => {
     try {
@@ -30,10 +35,10 @@ function App() {
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
-      {!isHide && <MovieGrid items={movies} />}
+      {isHide && <MovieGrid items={movies} onClick={handleModal} />}
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      {!isHide && <MovieModal />}
+      {isModal && <MovieModal items={movies} />}
     </>
   );
 }
