@@ -15,7 +15,7 @@ export const fetchMovies = async (query: string): Promise<Movie[]> => {
     },
   };
   const response = await axios.get<MoviesHttpResponse>(
-    `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=true&language=en-US&page=1`,
+    `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
     options
   );
 

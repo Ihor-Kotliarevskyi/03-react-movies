@@ -3,14 +3,14 @@ import css from "./MovieGrid.module.css";
 
 interface MovieGridProps {
   items: Movie[];
-  onClick: () => void;
+  onClick: (id: number) => void;
 }
 
 function MovieGrid({ items, onClick }: MovieGridProps) {
   return (
     <ul className={css.grid}>
       {items.map(({ id, poster_path, title }) => (
-        <li onClick={onClick} key={id}>
+        <li onClick={() => onClick(id)} key={id}>
           <div className={css.card}>
             <img
               className={css.image}
