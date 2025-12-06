@@ -28,7 +28,6 @@ function MovieModal({ movie, onClose }: MovieModalProps) {
       document.body.style.overflow = "";
     };
   }, [onClose]);
-  console.log(movie);
 
   return createPortal(
     <div

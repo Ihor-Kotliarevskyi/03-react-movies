@@ -30,10 +30,12 @@ function App() {
       setIsLoading(true);
       setIsError(false);
       const data = await fetchMovies(query);
-      if (data) {
+
+      if (data.length) {
+        setMovies(data);
+      } else {
         toast.error("No movies found for your request.");
       }
-      setMovies(data);
     } catch {
       setIsError(true);
     } finally {
@@ -44,7 +46,7 @@ function App() {
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
-      {movies && <MovieGrid onSelect={openModal} movies={movies} />}
+      {movies.length > 0 && <MovieGrid onSelect={openModal} movies={movies} />}
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       {isOpenModal && selectedMovie && (
