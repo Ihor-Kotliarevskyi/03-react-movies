@@ -4,14 +4,13 @@ import type Movie from "../../types/movie";
 interface MoviesHttpResponse {
   results: Movie[];
 }
-const myKey = import.meta.env.VITE_TMDB_TOKEN;
+const MY_KEY = import.meta.env.VITE_TMDB_TOKEN;
 
 export const fetchMovies = async (query: string): Promise<Movie[]> => {
   const options = {
-    method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: `Bearer ${myKey}`,
+      Authorization: `Bearer ${MY_KEY}`,
     },
   };
   const response = await axios.get<MoviesHttpResponse>(
