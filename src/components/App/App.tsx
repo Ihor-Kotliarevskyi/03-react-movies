@@ -5,8 +5,8 @@ import Loader from "../Loader/Loader";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import MovieModal from "../MovieModal/MovieModal";
 import SearchBar from "../SearchBar/SearchBar";
-import { fetchMovies } from "../services/movieService";
 import toast, { Toaster } from "react-hot-toast";
+import { fetchMovies } from "../../services/movieService";
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
