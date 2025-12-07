@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type Movie from "../../types/movie";
+import type { Movie } from "../../types/movie";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
 import MovieGrid from "../MovieGrid/MovieGrid";
@@ -13,15 +13,28 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-  const [isOpenModal, setIsOpenModal] = useState(false);
 
-  const openModal = (id: number) => {
-    const movie = movies.find((item) => item.id === id) || null;
-    setSelectedMovie(movie);
-    setIsOpenModal(true);
+  const openModal = ({
+    id,
+    poster_path,
+    backdrop_path,
+    title,
+    overview,
+    release_date,
+    vote_average,
+  }: Movie) => {
+    setSelectedMovie({
+      id,
+      poster_path,
+      backdrop_path,
+      title,
+      overview,
+      release_date,
+      vote_average,
+    });
   };
   const closeModal = () => {
-    setIsOpenModal(false);
+    setSelectedMovie(null);
   };
 
   const handleSearch = async (query: string) => {
@@ -49,7 +62,7 @@ function App() {
       {movies.length > 0 && <MovieGrid onSelect={openModal} movies={movies} />}
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      {isOpenModal && selectedMovie && (
+      {selectedMovie && (
         <MovieModal onClose={closeModal} movie={selectedMovie} />
       )}
       <Toaster position="top-center" reverseOrder={true} />
